@@ -1,44 +1,11 @@
 services:
-  # Database Service
-  - type: db
-    name: careerpilot-db
-    plan: free
-    ipAllowList: [] # allow all connections (Render defaults to internal access only unless specified)
-
-  # Spring Boot Backend Service
+  # CareerPilot AI Unified Web Service (Spring Boot + Static Frontend UI)
   - type: web
-    name: careerpilot-backend
+    name: careerpilot-ai
     plan: free
     runtime: docker
-    dockerfilePath: Dockerfile.backend
+    dockerfilePath: Dockerfile
     dockerContext: backend
     envVars:
-      - key: DB_URL
-        fromDatabase:
-          name: careerpilot-db
-          property: connectionString
-      - key: DB_USER
-        fromDatabase:
-          name: careerpilot-db
-          property: user
-      - key: DB_PASSWORD
-        fromDatabase:
-          name: careerpilot-db
-          property: password
-      - key: DB_DRIVER
-        value: org.postgresql.Driver
-      - key: DB_DIALECT
-        value: org.hibernate.dialect.PostgreSQLDialect
       - key: GEMINI_API_KEY
-        sync: false # User must set this manually in the Render dashboard
-
-  # React Frontend Service
-  - type: web
-    name: careerpilot-frontend
-    plan: free
-    runtime: docker
-    dockerfilePath: Dockerfile.frontend
-    dockerContext: frontend
-    ports:
-      - key: PORT
-        value: 5173
+        sync: false # Set this in Render's dashboard if you have a key
