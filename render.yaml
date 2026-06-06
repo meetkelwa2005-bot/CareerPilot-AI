@@ -4,7 +4,7 @@ services:
     name: careerpilot-ai
     plan: free
     runtime: docker
-    dockerfilePath: Dockerfile
+    dockerfilePath: backend/Dockerfile
     dockerContext: backend
     envVars:
       - key: GEMINI_API_KEY
